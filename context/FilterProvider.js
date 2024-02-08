@@ -13,7 +13,8 @@ const initialState = {
     product_value: " ",
     filters:{
         text: '',
-        category:'all',
+        category:'',
+        company:'All',
 
     }
 }
@@ -23,6 +24,7 @@ export default function FilterProvider({ children }) {
     const { state: { products } } = useGlobalProduct();
 
     const [filterState, filterDispatch] = useReducer(FilterReducer, initialState);
+    // console.log(filterState.all_Product);
 
     const setGridView = () => {
         return filterDispatch({ type: "SET_GRID_VIEW" })
@@ -35,7 +37,7 @@ export default function FilterProvider({ children }) {
         filterDispatch({ type: "GET_SORT_VALUE", payload: event.target.value })
     }
 
-    
+
     //filter the all_product
     useEffect(()=>{
         filterDispatch({type:"FILTER_PRODUCT"})

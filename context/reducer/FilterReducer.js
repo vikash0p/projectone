@@ -1,5 +1,7 @@
 
 export default function FilterReducer(state, action) {
+
+
     switch (action.type) {
         case "LOAD_FILTER_DATA":
             return {
@@ -67,11 +69,50 @@ export default function FilterReducer(state, action) {
 
             };
         case "FILTER_PRODUCT":
-            return{
-                ...state,
-                filter_product
+            // console.log(state);
+            let { all_Product, filters } = state;
+            let { text ,category } = state.filters
+            console.log(category);
+            let tempFilterProduct = [...all_Product];
+            // if (text) {
+            //     tempFilterProduct = tempFilterProduct.filter(curElem =>
+            //         curElem.name.toLowerCase().includes(state.filters.text.toLowerCase())
+            //     );
+            // }
+            const filterProductData = (curElem) => {
+                for (let key in filters) {
+                    if (filters[key]) {
+                        switch (key) {
+                            case "text":
+                                if (!curElem.name.toLowerCase().includes(filters.text.toLowerCase())) {
+                                    return false;
+                                }
+                                break;
+                            case "category":
+                                if (filters.category !== "All" && curElem.category !== filters.category) {
+                                    console.log("Filtered by category");
+                                    return false;
+                                }
+                                break;
+                            case "company":
+                                if (filters.company !== "All" && curElem.company !== filters.company) {
+                                    console.log("Filtered by category");
+                                    return false;
+                                }
+                                break;
+                            // Add additional cases for other filters if needed
+                        }
+                    }
+                }
+                return true;
+            };
 
-            }
+
+
+            return {
+                ...state,
+                filter_product: tempFilterProduct.filter(filterProductData)
+            };
 
         default:
             return {
