@@ -34,6 +34,14 @@ export default function FilterProvider({ children }) {
     const sorting = (event) => {
         filterDispatch({ type: "GET_SORT_VALUE", payload: event.target.value })
     }
+
+    
+    //filter the all_product
+    useEffect(()=>{
+        filterDispatch({type:"FILTER_PRODUCT"})
+    },[filterState.filters])
+
+
     //sort the product
     useEffect(() => {
         filterDispatch({ type: 'SORT_PRODUCT', payload: products });

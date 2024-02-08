@@ -66,7 +66,12 @@ export default function FilterReducer(state, action) {
                 },
 
             };
-        
+        case "FILTER_PRODUCT":
+            return{
+                ...state,
+                filter_product
+
+            }
 
         default:
             return {
