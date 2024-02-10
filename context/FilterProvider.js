@@ -13,8 +13,12 @@ const initialState = {
     product_value: " ",
     filters:{
         text: '',
-        category:'',
+        category:'All',
         company:'All',
+        colors:"All",
+        price:0,
+        maxPrice:0,
+        minPrice:0,
 
     }
 }
@@ -32,6 +36,11 @@ export default function FilterProvider({ children }) {
     const setListView = () => {
         return filterDispatch({ type: "SET_LIST_VIEW" })
     }
+//clear filter
+const clearFilter=()=>{
+    filterDispatch({type:"CLEAR_ALL_FILTER"})
+}
+
     //sorting function
     const sorting = (event) => {
         filterDispatch({ type: "GET_SORT_VALUE", payload: event.target.value })
@@ -65,7 +74,8 @@ export default function FilterProvider({ children }) {
         setGridView,
         setListView,
         sorting,
-        updateFilterValue
+        updateFilterValue,
+        clearFilter
     }
     return (
         <FilterContext.Provider value={value}>

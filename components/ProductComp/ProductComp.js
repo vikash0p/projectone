@@ -7,14 +7,16 @@ import { useGlobalFilter } from '@/context/FilterProvider'
 
 export default function ProductComp() {
     const { filterState: { filter_product, all_Product, grid_view, product_value }, setGridView, setListView, sorting } = useGlobalFilter();
+    // console.log("🚀 ~ file: ProductComp.js:10 ~ filter_product:", filter_product);
+    
     // console.log(product_value);
 
     return (
-        <div className='max-w-7xl mx-auto flex min-h-screen'>
-            <div className="basis-[20%] bg-green-200">
+        <div className='max-w-7xl mx-auto flex  '>
+            <div className="basis-[20%] bg-green-200  h-screen overflow-y-scroll  ">
                 <FilterSection />
             </div>
-            <div className="basis-[80%] bg-blue-200">
+            <div className="basis-[80%] ">
                 <div className="flex flex-col gap-4">
                     <div className="w-full h-14 bg-yellow-200">
                         <Sort
